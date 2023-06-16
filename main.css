@@ -28,7 +28,7 @@ hr {
   border-color: lightgray;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: max-content;
 }
 .container-add {
   width: 75%;
@@ -36,6 +36,7 @@ hr {
 
 .container-results {
   width: 25%;
+  justify-content: space-evenly;
 }
 .add-row {
   background-color: white;
@@ -99,7 +100,7 @@ hr {
   border-color: #efefef;
 }
 
-.add {
+#addbtn {
   position: relative;
   background-color: #2285d0;
   color: white;
@@ -295,7 +296,7 @@ hr {
 .plus::before,
 .bought::before,
 .cross::before,
-.add::before {
+#addbtn::before {
   content: attr(data-tooltip);
   --scale: 0;
   position: absolute;
@@ -318,7 +319,7 @@ hr {
   transform: translateX(-50%) translateY(-143%) scale(var(--scale));
 }
 
-.add::before {
+#addbtn::before {
   transform: translateX(-50%) translateY(-160%) scale(var(--scale));
 }
 
@@ -326,6 +327,6 @@ hr {
 .plus:hover::before,
 .bought:hover::before,
 .cross:hover::before,
-.add:hover::before {
+#addbtn:hover::before {
   --scale: 1;
 }
