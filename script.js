@@ -42,17 +42,31 @@ function renderProducts() {
     </div>
           <hr />`;
     } else {
-      list.innerHTML += `
-    <div class="add-row">
-      <div class="iteam-name">${currentProduct.name}</div>
+      if (currentProduct.isEditing) {
+        list.innerHTML += `
+  <div class="add-row">
+      <div class="iteam-name"><input class="adding-input" id="newName" type="text" value="${currentProduct.name}"/> 
+      <button id="newElemBtn" onclick="saveNewProductName('${currentProduct.name}')">✓</button></div>
       <div class="plus-amount-minus">
       <button class="minus" id="minus-one" data-tooltip="Want less?" onclick="removeOne('${currentProduct.name}')">—</button><span class="amount-add">${currentProduct.count}</span><button class="plus" data-tooltip="Want more?" onclick="addOne('${currentProduct.name}')">+</button></div>
       <div class="bought-cross"> <button class="bought" data-tooltip="Bought" onclick="letsBuy('${currentProduct.name}')">Купити</button><button class="cross" data-tooltip="Delete?" onclick="deleteProduct('${currentProduct.name}')">x</button></div>
     </div>
     <hr />
   `;
+      } else {
+        list.innerHTML += `
+    <div class="add-row">
+      <div class="iteam-name" onclick="replace('${currentProduct.name}')">${currentProduct.name}</div>
+      <div class="plus-amount-minus">
+      <button class="minus" id="minus-one" data-tooltip="Want less?" onclick="removeOne('${currentProduct.name}')">—</button><span class="amount-add">${currentProduct.count}</span><button class="plus" data-tooltip="Want more?" onclick="addOne('${currentProduct.name}')">+</button></div>
+      <div class="bought-cross"> <button class="bought" data-tooltip="Bought" onclick="letsBuy('${currentProduct.name}')">Купити</button><button class="cross" data-tooltip="Delete?" onclick="deleteProduct('${currentProduct.name}')">x</button></div>
+    </div>
+    <hr />
+  `;
+      }
     }
   }
+  updateStatistics();
 }
 
 renderProducts();
@@ -136,4 +150,59 @@ function removeOne(productName) {
     }
   }
   renderProducts();
+}
+
+//Вписання нового продукту на місце старого
+
+function replace(productName) {
+  for (let i = 0; i < PRODUCTS.length; i++) {
+    const currentProduct = PRODUCTS[i];
+    if (currentProduct.name === productName) {
+      currentProduct.isEditing = true;
+    }
+  }
+  renderProducts();
+}
+
+//збереження нового продукту
+
+function saveNewProductName(productName) {
+  const saveNewProductNameButton = event.target;
+  const newProductNameInput = saveNewProductNameButton.previousElementSibling;
+  const newProductName = newProductNameInput.value;
+
+  for (let i = 0; i < PRODUCTS.length; i++) {
+    const currentProduct = PRODUCTS[i];
+
+    if (currentProduct.name === productName) {
+      currentProduct.name = newProductName;
+      currentProduct.isEditing = false;
+    }
+  }
+
+  renderProducts();
+}
+
+//Оновлення статистики
+
+function updateStatistics() {
+  const stillInProgress = document.getElementById("still-in-progress");
+  const inBasket = document.getElementById("in-basket");
+  stillInProgress.innerHTML = "";
+  inBasket.innerHTML = "";
+
+  for (let i = 0; i < PRODUCTS.length; i++) {
+    const currentProduct = PRODUCTS[i];
+
+    if (currentProduct.isBought) {
+      inBasket.innerHTML += `
+        <span class="product-item">${currentProduct.name}
+<span class="amount-result">${currentProduct.count}</span></span>`;
+    } else {
+      stillInProgress.innerHTML += `
+        <span class="product-item">${currentProduct.name}
+        <span class="amount-result">${currentProduct.count}</span></span>
+      `;
+    }
+  }
 }

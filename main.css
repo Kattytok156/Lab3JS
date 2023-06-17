@@ -61,15 +61,27 @@ hr {
   text-decoration: line-through;
 }
 
-.iteam-name > .adding-input {
+.adding-input {
   width: 70%;
   border: 1px solid;
-  border-radius: 3px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
   background-color: inherit;
   outline: none;
 }
-.iteam-name > .adding-input:focus {
+.adding-input:focus {
   border: 2px solid #71afe1;
+}
+
+#newElemBtn {
+  position: relative;
+  background-color: #2285d0;
+  color: white;
+  font-weight: small;
+  width: 20%;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border: 1px solid #2285d0;
 }
 
 .plus-amount-minus {
