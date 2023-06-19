@@ -92,9 +92,9 @@ addButton.addEventListener("click", function () {
 
 //Видалення продукта при натисненні на хрестик
 
-function deleteProduct(productName) {
+function deleteProduct(name) {
   for (let i = 0; i < PRODUCTS.length; i++) {
-    if (PRODUCTS[i].name === productName) {
+    if (PRODUCTS[i].name === name) {
       PRODUCTS.splice([i], 1);
     }
   }
@@ -104,10 +104,10 @@ function deleteProduct(productName) {
 
 //Купівля продукта
 
-function letsBuy(productName) {
+function letsBuy(name) {
   for (let i = 0; i < PRODUCTS.length; i++) {
     const currentProduct = PRODUCTS[i];
-    if (currentProduct.name === productName) {
+    if (currentProduct.name === name) {
       currentProduct.isBought = true;
     }
   }
@@ -116,10 +116,10 @@ function letsBuy(productName) {
 
 //Не купувати продукт
 
-function unBuy(productName) {
+function unBuy(name) {
   for (let i = 0; i < PRODUCTS.length; i++) {
     const currentProduct = PRODUCTS[i];
-    if (currentProduct.name === productName) {
+    if (currentProduct.name === name) {
       currentProduct.isBought = false;
     }
   }
@@ -128,10 +128,10 @@ function unBuy(productName) {
 
 //Додати одиницю товару
 
-function addOne(productName) {
+function addOne(name) {
   for (let i = 0; i < PRODUCTS.length; i++) {
     const currentProduct = PRODUCTS[i];
-    if (currentProduct.name === productName) {
+    if (currentProduct.name === name) {
       currentProduct.count += 1;
     }
   }
@@ -140,10 +140,10 @@ function addOne(productName) {
 
 //Відняти одиницю товару
 
-function removeOne(productName) {
+function removeOne(name) {
   for (let i = 0; i < PRODUCTS.length; i++) {
     const currentProduct = PRODUCTS[i];
-    if (currentProduct.name === productName) {
+    if (currentProduct.name === name) {
       if (currentProduct.count > 1) {
         currentProduct.count -= 1;
       }
@@ -154,10 +154,10 @@ function removeOne(productName) {
 
 //Вписання нового продукту на місце старого
 
-function replace(productName) {
+function replace(name) {
   for (let i = 0; i < PRODUCTS.length; i++) {
     const currentProduct = PRODUCTS[i];
-    if (currentProduct.name === productName) {
+    if (currentProduct.name === name) {
       currentProduct.isEditing = true;
     }
   }
@@ -166,7 +166,7 @@ function replace(productName) {
 
 //збереження нового продукту
 
-function saveNewProductName(productName) {
+function saveNewProductName(name) {
   const saveNewProductNameButton = event.target;
   const newProductNameInput = saveNewProductNameButton.previousElementSibling;
   const newProductName = newProductNameInput.value;
@@ -174,7 +174,7 @@ function saveNewProductName(productName) {
   for (let i = 0; i < PRODUCTS.length; i++) {
     const currentProduct = PRODUCTS[i];
 
-    if (currentProduct.name === productName) {
+    if (currentProduct.name === name) {
       currentProduct.name = newProductName;
       currentProduct.isEditing = false;
     }
